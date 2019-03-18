@@ -7,7 +7,17 @@ function randomString() {
 	}
 	return str;
 }
-
+var column = {
+  id: randomString(),
+  name: 'todo',
+  element: document.createElement('div')
+};
+var card = {
+  id: randomString(),
+  description: 'Create Kanban app',
+  color: 'green',
+  element: document.createElement('div')
+};
 function generateTemplate(name, data, basicElement) {
   var template = document.getElementById(name).innerHTML;
   var element = document.createElement(basicElement || 'div');
@@ -20,7 +30,6 @@ function generateTemplate(name, data, basicElement) {
 
 function Column(name) {
   var self = this;
-  
   this.id = randomString();
   this.name = name;
   this.element = generateTemplate('column-template', { name: this.name });
@@ -29,12 +38,9 @@ function Column(name) {
 	  if (event.target.classList.contains('btn-delete')) {
 		self.removeColumn();
 	  }
-	   if (event.target.classList.contains('add-card')) {
-			var card =  prompt("Enter the name of the card");
-			if (card!== null) {
-				self.addCard(new Card(card));
-			}
-	   }
+	  if (event.target.classList.contains('add-card')) {
+		self.addCard(new Card(prompt("Enter the name of the card")));
+	  }
 	});
 }
 
@@ -50,7 +56,6 @@ Column.prototype = {
 
 function Card(description) {
   var self = this;
-
   this.id = randomString();
   this.description = description;
   this.element = generateTemplate('card-template', { description: this.description }, 'li');
@@ -58,6 +63,9 @@ function Card(description) {
 	  event.stopPropagation();
 	  if (event.target.classList.contains('btn-delete')) {
 		self.removeCard();
+	  }
+	   if (event.target.classList.contains('add-card')) {
+		self.addCard(new Card(prompt("Enter the name of the card")));
 	  }
 	});
 }
@@ -90,12 +98,9 @@ function initSortable(id) {
 };
 document.querySelector('#board .create-column').addEventListener('click', function() {
     var name = prompt('Enter a column name');
-	if (name!== null) {
-		var column = new Column(name);
-		board.addColumn(column);
-	}	
+    var column = new Column(name);
+    board.addColumn(column);
 });
-	
 // CREATING COLUMNS
 var todoColumn = new Column('To do');
 var doingColumn = new Column('Doing');
