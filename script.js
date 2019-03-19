@@ -23,7 +23,7 @@ function Column(name) {
   
   this.id = randomString();
   this.name = name;
-  this.element = generateTemplate('column-template', { name: this.name });
+  this.element = generateTemplate('column-template', { name: this.name, id: this.id });
 
 	this.element.querySelector('.column').addEventListener('click', function (event) {
 	  if (event.target.classList.contains('btn-delete')) {
@@ -31,7 +31,7 @@ function Column(name) {
 	  }
 	   if (event.target.classList.contains('add-card')) {
 			var card =  prompt("Enter the name of the card");
-			if (card!== null) {
+			if (card!== null && card!=='') {
 				self.addCard(new Card(card));
 			}
 	   }
@@ -50,10 +50,9 @@ Column.prototype = {
 
 function Card(description) {
   var self = this;
-
   this.id = randomString();
   this.description = description;
-  this.element = generateTemplate('card-template', { description: this.description }, 'li');
+  this.element = generateTemplate('card-template', { description: this.description, id: this.id }, 'li');
   this.element.querySelector('.card').addEventListener('click', function (event) {
 	  event.stopPropagation();
 	  if (event.target.classList.contains('btn-delete')) {
@@ -69,10 +68,7 @@ Card.prototype = {
 
 var board = {
     name: 'Kanban Board',
-    addColumn: function(column) {
-      this.element.appendChild(column.element);
-      initSortable(column.id); 
-    },
+    
     element: document.querySelector('#board .column-container'),
 
 	addColumn: function(column) {
@@ -90,7 +86,7 @@ function initSortable(id) {
 };
 document.querySelector('#board .create-column').addEventListener('click', function() {
     var name = prompt('Enter a column name');
-	if (name!== null) {
+	if (name!== null && name!== '') {
 		var column = new Column(name);
 		board.addColumn(column);
 	}	

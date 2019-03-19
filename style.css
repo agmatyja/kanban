@@ -3,7 +3,7 @@
 	background-color: #ffffff; 
 	list-style-type: none;
 }
-h1 {
+h1, h2 {
 	text-align: center;
 	font-size: 16px;
 }
@@ -12,33 +12,37 @@ h1 {
 	display: flex;
 	flex-wrap: nowrap;
 	background-color: #f9f8f4;
-	max-width: 80%;
+	max-width: 90%;
 	padding: 15px;
-	margin: 15px auto;
+	margin: 0 auto;
 	
 }
+.column-card-list {
+	min-height: 100px;
+	width: 100px;
+}
 .column {
-	margin: 0 auto;
+	margin: 20px auto;
 	background-color: #ffffff; 
 }
 .card {
 	color: #09897f;
 	background-color: #f7f0d7;
 	border: solid 1px #09897f; 
-	width: 70px;
-	height: 80px;
+	width: 80px;
+	height: 90px;
 	margin: 5px;
 	border-radius: 10%;
 }
 .add-card, .create-column {
 	color: #1b3a21;
 	text-align: center;
+	margin: 5px;
 	border-radius: 20%;
 }
 .btn-delete {
 	color: #1d635d;
 	border: solid 1px #1d635d;
 	background-color: #ffffff;
-	float: right;
 	border-radius: 20%;
 }

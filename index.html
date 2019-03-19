@@ -13,14 +13,17 @@
 	</div>
 	<script id="column-template" type="x-tmpl-mustache">
 		<div class="column">
-			<h2 class="column-title">{{name}}</h2>
-			<ul id="random" class="column-card-list"></ul>
-			<button class="btn-delete">X</button>
-			<button class="add-card">Add a card</button>
+			<div draggable="false">
+				<h2 class="column-title">{{name}}</h2>
+				<button class="btn-delete">X</button>
+				<button class="add-card">Add a card</button>
+			</div>
+			<ul id="{{id}}" class="column-card-list">
+			</ul>
 		</div>
 	</script>
 	<script id="card-template" type="x-tmpl-mustache">
-		<div class="card">
+		<div id="{{id}}" class="card">
 			<p class="card-description">{{ description }}</p>
 			<button class="btn-delete">x</button>
 		</div>
